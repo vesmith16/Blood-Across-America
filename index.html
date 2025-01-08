@@ -104,7 +104,7 @@
 </head>
 <body>
     <header>
-        <h1>Blood Donation Tracker</h1>
+        <h1>Blood Across America</h1>
         <p>Track and contribute to blood donations across the United States</p>
     </header>
 
@@ -121,6 +121,7 @@
     <section id="home" class="active">
         <h2 style="text-align: center;">Map of all donation pins</h2>
         <div id="map"></div>
+        <iframe src=https://www.google.com/maps/d/u/1/embed?mid=1bFCFMWA6mwvJH_6T_faOmq7DaROSJRv_&ehbc=2E312F width="640" height="480"></iframe>
     </section>
 
     <section id="about" style="padding: 20px; margin: 0 auto; max-width: 1000px;">
@@ -494,14 +495,34 @@
                                 const stateFullName = path.getAttribute('data-name');
                                 const donationCount = stateDonations[stateFullName] || 0;
 
-                                // Set base color based on donation count
-                                const baseColor = donationCount > 0 ? '#e63946' : '#d3d3d3';
-                                path.style.fill = baseColor; // Red for donations, grey otherwise
+                                // Choose a base red
+                                const baseColor = '#e63946';
+
+                                // Function to calculate the fill color based on donation count
+                                function getFillColor(donationCount) {
+                                    if (donationCount === 0) {
+                                        return '#d3d3d3'; // Gray for no donations
+                                    } else {
+                                        const effectiveCount = Math.min(donationCount, 10); // Cap at 10 for darkest shade
+                                        const fraction = effectiveCount / 10; // Calculate fraction between 0 and 1
+                                        return darkenColor(baseColor, fraction); // Darken baseColor based on fraction
+                                    }
+                                }
+
+                                // Initial fill color based on donation count
+                                const originalFillColor = getFillColor(donationCount);
+                                path.style.fill = originalFillColor;
 
                                 // Add hover effects
                                 path.addEventListener('mouseenter', () => {
-                                    const darkenedColor = darkenColor(baseColor, 0.35);
-                                    path.style.fill = darkenedColor;
+                                    // Darken the current color even more (by 0.35 or 35%) only if it's not gray
+                                    const hoverColor = donationCount === 0 
+                                        ? darkenColor('#d3d3d3', 0.35)
+                                        : darkenColor(originalFillColor, 0.45); // Darken otherwise
+
+                                    path.style.fill = hoverColor;
+
+                                    // Tooltip creation
                                     const tooltip = document.createElement('div');
                                     tooltip.id = 'tooltip';
                                     tooltip.style.position = 'absolute';
@@ -512,16 +533,23 @@
                                     tooltip.innerHTML = `<strong>${stateFullName}</strong><br>Donations: ${donationCount}`;
                                     document.body.appendChild(tooltip);
 
+                                    // Move tooltip with mouse
                                     path.addEventListener('mousemove', (e) => {
                                         tooltip.style.left = `${e.pageX + 10}px`;
                                         tooltip.style.top = `${e.pageY + 10}px`;
                                     });
                                 });
+
                                 path.addEventListener('mouseleave', () => {
-                                    path.style.fill = baseColor;
+                                    // Revert to the original fill color (based on donation count)
+                                    path.style.fill = originalFillColor;
+
+                                    // Remove tooltip
                                     const tooltip = document.getElementById('tooltip');
                                     if (tooltip) tooltip.remove();
                                 });
+
+
                                 // Add click functionality to determine clicked state, navigate, and highlight the first donation
                                 path.addEventListener('click', () => {
                                     const stateName = path.getAttribute('data-name'); // Get the full state name from the attribute
