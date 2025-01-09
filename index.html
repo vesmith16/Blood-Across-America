@@ -30,7 +30,8 @@
             overflow: hidden;
             display: flex;
             justify-content: center;
-            align-items: center; /* Ensure alignment */
+            align-items: center;
+            position: relative;
         }
         nav a {
             color: white;
@@ -45,42 +46,50 @@
             background-color: #e63946;
             color: white;
         }
-
-        /* New styles for hamburger menu */
         .hamburger {
-            display: none; /* Hidden on desktop */
+            display: none;
             font-size: 24px;
             color: white;
             cursor: pointer;
             margin-left: 20px;
         }
         .menu {
-            display: flex; /* Default desktop layout */
-            flex-direction: row; /* Horizontal layout */
+            display: flex;
+            flex-direction: row;
             gap: 0;
         }
         .menu.open {
-            display: flex; /* Ensures visibility on mobile when toggled */
-            flex-direction: column; /* Stacks items vertically */
+            display: flex;
+            flex-direction: column;
         }
-
-        /* Responsive styles for mobile */
+        .close-menu {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+        }
         @media (max-width: 768px) {
             .menu {
-                display: none; /* Hide menu by default on mobile */
-                position: absolute; /* Position for dropdown */
+                display: none;
+                position: absolute;
                 top: 50px;
                 left: 0;
-                width: 100%; /* Full width */
+                width: 100%;
                 background-color: #333;
                 flex-direction: column;
             }
             .hamburger {
-                display: block; /* Show hamburger icon on mobile */
+                display: block;
             }
             nav a {
-                padding: 10px; /* Adjust padding for mobile */
-                border-top: 1px solid #575757; /* Add border between items */
+                padding: 10px;
+                border-top: 1px solid #575757;
+            }
+            .close-menu {
+                display: block;
             }
         }
         section {
@@ -141,11 +150,11 @@
             display: block;
         }
         .highlight {
-            background-color: yellow; /* Highlight color */
-            transition: background-color 0.5s ease; /* Smooth transition */
+            background-color: yellow;
+            transition: background-color 0.5s ease;
         }
         .fade-highlight {
-            background-color: transparent; /* Fade to transparent */
+            background-color: transparent;
         }
         .hidden {
             visibility: hidden;
@@ -158,8 +167,6 @@
             margin: 0 auto;
             display: block;
         }
-
-
     </style>
 </head>
 <body>
@@ -171,14 +178,15 @@
     <nav>
         <div class="hamburger" onclick="toggleMenu()">☰</div>
         <div class="menu" id="mobileMenu">
-            <a href="#home" class="tab-link" data-tab="home">Home</a>
-            <a href="#about" class="tab-link" data-tab="about">About</a>
-            <a href="donation-info" class="tab-link" data-tab="donation-info">Donation Information</a>
-            <a href="elanco" class="tab-link" data-tab="elanco">Elanco Blood Drive</a>
-            <a href="#submit-donation" class="tab-link" data-tab="submit-donation">Submit Your Donation</a>
-            <a href="#state-map" class="tab-link" data-tab="state-map">State Map</a>
-            <a href="#pinned-map" class="tab-link" data-tab="pinned-map">Pinned Map</a>
-            <a href="#contact-us" class="tab-link" data-tab="contact-us">Contact Us</a>
+            <div class="close-menu" onclick="closeMenu()">✖ Close Menu</div>
+            <a href="#home" class="tab-link" data-tab="home" onclick="closeMenu()">Home</a>
+            <a href="#about" class="tab-link" data-tab="about" onclick="closeMenu()">About</a>
+            <a href="#donation-info" class="tab-link" data-tab="donation-info" onclick="closeMenu()">Donation Information</a>
+            <a href="#elanco" class="tab-link" data-tab="elanco" onclick="closeMenu()">Elanco Blood Drive</a>
+            <a href="#submit-donation" class="tab-link" data-tab="submit-donation" onclick="closeMenu()">Submit Your Donation</a>
+            <a href="#state-map" class="tab-link" data-tab="state-map" onclick="closeMenu()">State Map</a>
+            <a href="#pinned-map" class="tab-link" data-tab="pinned-map" onclick="closeMenu()">Pinned Map</a>
+            <a href="#contact-us" class="tab-link" data-tab="contact-us" onclick="closeMenu()">Contact Us</a>
         </div>
     </nav>    
 
@@ -186,6 +194,11 @@
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('open');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.remove('open');
         }
     </script>
     <section id="home" class="active" style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 1000px; margin: 0 auto;">
