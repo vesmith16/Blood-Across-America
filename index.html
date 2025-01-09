@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Donation Tracker</title>
+    <title>Blood Across America</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         body {
@@ -106,10 +106,10 @@
         overflow: hidden;
         }
         .mini-svg-map {
-        width: 60%; /* Adjust width as needed */
-        height: 350px;
+        width: 100%;
+        height: auto;
         margin: 0 auto;
-        display: block
+        display: block;
         }
 
     </style>
@@ -207,21 +207,26 @@
     <section id="about" style="padding: 20px; margin: 0 auto; max-width: 1000px;">
         <h2 style="text-align: center;">About</h2>
         <div style="display: flex; align-items: center;">
-            <div style="text-align: left; max-width: 60%;">
-                <p>
+            <div style="text-align: left; max-width: 60%; border: 5px solid black; background-color: #F29CA2; border-radius: 30px; padding: 20px; color: black;">
+                <p><strong>
                     Hello! I’m Vinton Smith, a sales representative for Elanco Animal Health. Over the years, I’ve donated blood in 49 of the 50 states, with Hawaii being the final state on my list. Before I make my final donation in Hawaii, my mission is to encourage Elanco employees to donate blood in all 50 states. 
+                </strong>
                 </p>
-                <p style="margin-bottom: 20px;">
+                <p style="margin-bottom: 20px;"><strong>
                     This initiative is deeply personal to me, stemming from my Eagle Scout project, where I worked to educate the public about the critical importance of blood donation. This website is designed to not only track and promote blood donations but to inspire others to join this life-saving mission. Together, we can make a difference!
+                </strong>
                 </p>
-                <p>This initiative is more than just a goal—it's a collective effort to impact countless lives, uniting the Elanco community under a shared purpose of compassion and generosity. Together, we have the power to reach every corner of the nation, demonstrating that one small act—donating blood—can create ripples of hope and healing everywhere. Let’s make 2025 a year of action, unity, and life-saving impact!</p>
-            </div>
+                <p><strong>
+                    This initiative is more than just a goal—it's a collective effort to impact countless lives, uniting the Elanco community under a shared purpose of compassion and generosity. Together, we have the power to reach every corner of the nation, demonstrating that one small act—donating blood—can create ripples of hope and healing everywhere. Let’s make 2025 a year of action, unity, and life-saving impact!
+                </strong>
+                </p>
+            </div>            
             <img src="images/VintonSmithPicture.jpeg" width="300" alt="Picture of Vinton Smith" style="margin-left: 20px;">
         </div>
 
-        <p style="margin-top: 60px;margin-bottom: 20px; text-align: center;"><span style="font-size: 20px; font-weight: bold;">Our path to donations in all 50 states!</span></p>
-        <div class="mini-svg-map">
-        </div> 
+        <p style="margin-top: 60px;margin-bottom: 20px; text-align: center;">Our path to donations in all 50 states!</p>
+            <div class="mini-svg-map" style="width: 100%; max-width: 600px;">
+            </div>    
         <h3 style="text-align: center;">My Donation Images</h3>
         <div style="display: flex; justify-content: center; gap: 10px;">
             <img src="images/Wilkes barre.jpg" alt="Wilkes Barre Donation" style="border: 1px solid #ccc; width: auto; height: 250px;">
@@ -232,6 +237,8 @@
             <img src="images/Penn State Hersey.jpg" alt="Penn State Hershey" style="border: 1px solid #ccc; width: auto; height: 300px;">
             <img src="images/26 - 2023-07-07 - Frederick, MD (1)_1.jpg" alt="Frederick" style="border: 1px solid #ccc; width: auto; height: 300px;">
         </div>
+        <h3 style="text-align: center; margin-top: 100px;">I am also now working towards a new goal of donating platelets in all 50 states. Here is my progress:</h3>
+        <img src="images/Map - Platelets.jpg" style="max-width: 1000px;">
     </section>
     
     <section id="donation-info" style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
@@ -336,8 +343,31 @@
             <button type="submit">Submit Donation</button>
 
         </form>
+        <div id="loadingBar" style="display: none; text-align: center;">
+            <h1>Processing your donation...</h1>
+            <div class="loading-spinner"></div>
+        </div>
     </section>
     
+    <script>
+        // Loading Bar Script
+        document.getElementById("donationForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const loadingBar = document.getElementById("loadingBar");
+            loadingBar.style.display = "block";
+
+            const submitButton = event.target.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+
+            setTimeout(() => {
+                alert("Form submitted successfully!");
+                loadingBar.style.display = "none";
+                submitButton.disabled = false;
+            }, 3000);
+        });
+    </script>
+
     <section id="donation-list">
         <button id="to-state-map-btn" style="background-color: #007bff; color: #fff;font-family: Arial, 
         sans-serif;font-size: 16px;padding: 10px 20px;border: none;border-radius: 4px;
@@ -747,7 +777,7 @@
                     loadSvgMap('.svg-map', 'us.svg');
 
                     // Load the mini map
-                    loadSvgMap('.mini-svg-map', 'us.svg', 0.5);
+                    loadSvgMap('.mini-svg-map', 'us.svg', 0.7);
 
                     function darkenColor(hex, percent) {
                         const num = parseInt(hex.slice(1), 16);
