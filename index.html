@@ -164,15 +164,15 @@
     </nav>
 
     <div class="mobile-menu">
-        <select onchange="location = this.value;">
-            <option value="#home">Home</option>
-            <option value="#about">About</option>
+        <select id="mobileMenu">
+            <option value="home">Home</option>
+            <option value="about">About</option>
             <option value="donation-info">Donation Information</option>
             <option value="elanco">Elanco Blood Drive</option>
-            <option value="#submit-donation">Submit Your Donation</option>
-            <option value="#state-map">State Map</option>
-            <option value="#pinned-map">Pinned Map</option>
-            <option value="#contact-us">Contact Us</option>
+            <option value="submit-donation">Submit Your Donation</option>
+            <option value="state-map">State Map</option>
+            <option value="pinned-map">Pinned Map</option>
+            <option value="contact-us">Contact Us</option>
         </select>
     </div>
 
@@ -702,6 +702,23 @@
                 document.getElementById(targetTab).classList.add('active');
                 e.target.classList.add('active');
             });
+        });
+
+        document.getElementById('mobileMenu').addEventListener('change', (e) => {
+            const targetTab = e.target.value;
+
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active', 'hidden');
+            });
+
+            document.querySelectorAll('.tab-link').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            document.getElementById(targetTab).classList.add('active');
+
+            const activeTab = document.querySelector(`.tab-link[data-tab="${targetTab}"]`);
+            if (activeTab) activeTab.classList.add('active');
         });
 
         // Load the SVG dynamically and add hover effects with donation count
