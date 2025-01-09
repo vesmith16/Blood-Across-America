@@ -224,8 +224,9 @@
             <img src="images/VintonSmithPicture.jpeg" width="300" alt="Picture of Vinton Smith" style="margin-left: 20px;">
         </div>
 
-        <p style="margin-top: 60px;margin-bottom: 20px; text-align: center;">Our path to donations in all 50 states!</p>
-            <div class="mini-svg-map" style="width: 100%; max-width: 600px;">
+        <h3 style="margin-top: 60px;margin-bottom: 20px; text-align: center;">Our path to donations in all 50 states!</h3>
+        <p style="text-align: center;">Click the map to go to the State Map tab!</p>
+            <div class="mini-svg-map" style="width: 100%; max-width: 600px; position: relative; left: -90px;">
             </div>    
         <h3 style="text-align: center;">My Donation Images</h3>
         <div style="display: flex; justify-content: center; gap: 10px;">
@@ -555,7 +556,7 @@
                         <td>${donation.state}</td>
                         <td>${donation.date}</td>
                         <td>${donation.details}</td>
-                        <td>${donation.images ? `<img src="${donation.images}" style="max-width: 150px; height: auto;">` : ''}</td>
+                        <td>${donation.images ? `<img src="${donation.images}" style="max-height: 200px; height: auto;">` : ''}</td>
                     `;
                     tableBody.appendChild(row);
                 });
@@ -660,7 +661,7 @@
                     }, {});
 
                     // Function to load and render an SVG map
-                    function loadSvgMap(containerSelector, svgFile, scale = 1) {
+                    function loadSvgMap(containerSelector, svgFile, scale = 1, enableClick = true) {
                         fetch(svgFile)
                             .then(response => response.text())
                             .then(svgContent => {
@@ -728,7 +729,7 @@
                                     });
 
                                     // Add click functionality for detailed map only
-                                    if (containerSelector === '.svg-map') {
+                                    if (enableClick && containerSelector === '.svg-map') {
                                         path.addEventListener('click', () => {
                                             const stateName = path.getAttribute('data-name'); // Get the full state name from the attribute
 
@@ -769,6 +770,14 @@
                                 // Scale the map for smaller containers
                                 container.style.transform = `scale(${scale})`;
                                 container.style.transformOrigin = 'top left';
+
+                                // Add button functionality for mini map
+                                if (!enableClick && containerSelector === '.mini-svg-map') {
+                                    container.addEventListener('click', () => {
+                                        const backToStateMapButton = document.getElementById('to-state-map-btn');
+                                        if (backToStateMapButton) backToStateMapButton.click();
+                                    });
+                                }
                             })
                             .catch(error => console.error(`Error loading SVG for ${containerSelector}:`, error));
                     }
@@ -777,7 +786,7 @@
                     loadSvgMap('.svg-map', 'us.svg');
 
                     // Load the mini map
-                    loadSvgMap('.mini-svg-map', 'us.svg', 0.7);
+                    loadSvgMap('.mini-svg-map', 'us.svg', 0.7, false);
 
                     function darkenColor(hex, percent) {
                         const num = parseInt(hex.slice(1), 16);
@@ -789,8 +798,7 @@
                     }
                 })
                 .catch(error => console.error('Error loading JSON data:', error));
-        });
-        
+        });     
     </script>
 </body>
 </html>
