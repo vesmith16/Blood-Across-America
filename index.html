@@ -30,8 +30,6 @@
             overflow: hidden;
             display: flex;
             justify-content: center;
-            align-items: center;
-            position: relative;
         }
         nav a {
             color: white;
@@ -45,55 +43,6 @@
         nav a.active {
             background-color: #e63946;
             color: white;
-        }
-        .hamburger {
-            display: none;
-            font-size: 24px;
-            color: white;
-            cursor: pointer;
-            margin-left: 20px;
-        }
-        .menu {
-            display: flex;
-            flex-direction: row;
-            gap: 0;
-        }
-        .menu.open {
-            display: flex;
-            flex-direction: column;
-        }
-        .close-menu {
-            display: none;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 18px;
-            color: white;
-            cursor: pointer;
-        }
-        @media (max-width: 768px) {
-            .menu {
-                display: none;
-                position: absolute;
-                top: 50px;
-                left: 0;
-                width: 100%;
-                background-color: #333;
-                flex-direction: column;
-            }
-            .menu.open {
-                display: flex;
-            }
-            .hamburger {
-                display: block;
-            }
-            nav a {
-                padding: 10px;
-                border-top: 1px solid #575757;
-            }
-            .close-menu {
-                display: block;
-            }
         }
         section {
             display: none;
@@ -153,11 +102,11 @@
             display: block;
         }
         .highlight {
-            background-color: yellow;
-            transition: background-color 0.5s ease;
+            background-color: yellow; /* Highlight color */
+            transition: background-color 0.5s ease; /* Smooth transition */
         }
         .fade-highlight {
-            background-color: transparent;
+            background-color: transparent; /* Fade to transparent */
         }
         .hidden {
             visibility: hidden;
@@ -170,6 +119,31 @@
             margin: 0 auto;
             display: block;
         }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            .mobile-menu {
+                display: block;
+                background-color: #333;
+                padding: 10px;
+            }
+            .mobile-menu select {
+                width: 100%;
+                padding: 10px;
+                background-color: #e63946;
+                color: white;
+                border: none;
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -179,35 +153,29 @@
     </header>
 
     <nav>
-        <div class="hamburger" onclick="toggleMenu()">☰</div>
-        <div class="menu" id="mobileMenu">
-            <div class="close-menu" onclick="closeMenu()">✖ Close Menu</div>
-            <a href="#home" class="tab-link" data-tab="home" onclick="closeMenu()">Home</a>
-            <a href="#about" class="tab-link" data-tab="about" onclick="closeMenu()">About</a>
-            <a href="#donation-info" class="tab-link" data-tab="donation-info" onclick="closeMenu()">Donation Information</a>
-            <a href="#elanco" class="tab-link" data-tab="elanco" onclick="closeMenu()">Elanco Blood Drive</a>
-            <a href="#submit-donation" class="tab-link" data-tab="submit-donation" onclick="closeMenu()">Submit Your Donation</a>
-            <a href="#state-map" class="tab-link" data-tab="state-map" onclick="closeMenu()">State Map</a>
-            <a href="#pinned-map" class="tab-link" data-tab="pinned-map" onclick="closeMenu()">Pinned Map</a>
-            <a href="#contact-us" class="tab-link" data-tab="contact-us" onclick="closeMenu()">Contact Us</a>
-        </div>
-    </nav>    
+        <a href="#home" class="tab-link" data-tab="home">Home</a>
+        <a href="#about" class="tab-link" data-tab="about">About</a>
+        <a href="donation-info" class="tab-link" data-tab="donation-info">Donation Information</a>
+        <a href="elanco" class="tab-link" data-tab="elanco">Elanco Blood Drive</a>
+        <a href="#submit-donation" class="tab-link" data-tab="submit-donation">Submit Your Donation</a>
+        <a href="#state-map" class="tab-link" data-tab="state-map">State Map</a>
+        <a href="#pinned-map" class="tab-link" data-tab="pinned-map">Pinned Map</a>
+        <a href="#contact-us" class="tab-link" data-tab="contact-us">Contact Us</a>
+    </nav>
 
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            if (menu.classList.contains('open')) {
-                menu.classList.remove('open');
-            } else {
-                menu.classList.add('open');
-            }
-        }
+    <div class="mobile-menu">
+        <select onchange="location = this.value;">
+            <option value="#home">Home</option>
+            <option value="#about">About</option>
+            <option value="donation-info">Donation Information</option>
+            <option value="elanco">Elanco Blood Drive</option>
+            <option value="#submit-donation">Submit Your Donation</option>
+            <option value="#state-map">State Map</option>
+            <option value="#pinned-map">Pinned Map</option>
+            <option value="#contact-us">Contact Us</option>
+        </select>
+    </div>
 
-        function closeMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.remove('open');
-        }
-    </script>
     <section id="home" class="active" style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 1000px; margin: 0 auto;">
         <h2 style="text-align: center; font-size: 2em; color: #b22222; margin-bottom: 20px;">Hello, welcome to Blood Across America!</h2>
         <p style="text-align: center; font-size: 1.2em; margin-bottom: 20px;">
