@@ -119,6 +119,30 @@
             margin: 0 auto;
             display: block;
         }
+        .content-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap; /* Ensures content wraps when needed */
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .text-box {
+            text-align: left;
+            max-width: 60%;
+            border: 5px solid black;
+            background-color: #F29CA2;
+            border-radius: 30px;
+            padding: 20px;
+            color: black;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: auto;
+            margin-left: 20px;
+        }
 
         @media (max-width: 768px) {
             nav {
@@ -137,6 +161,17 @@
                 border: none;
                 font-size: 1rem;
             }
+            .content-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .text-box {
+                max-width: 90%;
+                margin-bottom: 20px;
+            }
+            .profile-image {
+                margin-left: 0;
+            }
         }
 
         @media (min-width: 769px) {
@@ -144,6 +179,7 @@
                 display: none;
             }
         }
+
     </style>
 </head>
 <body>
@@ -160,6 +196,7 @@
         <a href="#submit-donation" class="tab-link" data-tab="submit-donation">Submit Your Donation</a>
         <a href="#state-map" class="tab-link" data-tab="state-map">State Map</a>
         <a href="#pinned-map" class="tab-link" data-tab="pinned-map">Pinned Map</a>
+        <a href="#media" class="tab-link" data-tab="media">Media</a>
         <a href="#contact-us" class="tab-link" data-tab="contact-us">Contact Us</a>
     </nav>
 
@@ -204,11 +241,11 @@
             <strong>Alaska:</strong> One of the highlights of my journey was the incredible support from Alaska Airlines. They flew me out to Alaska for my donation, generously contributed $10,000 to the Blood Bank of Alaska, and are even flying me to Hawaii as part of this milestone. Their commitment and kindness have made this experience unforgettable, and I’ll always cherish the memories and the meaningful support they’ve provided.
         </p>
         <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-            <img src="images/alaska 2.jpg" alt="Alaska blood center." style="border: 1px solid #ccc; width: auto; height: 250px;">
-            <img src="images/alaska.jpg" alt="After my donation." style="border: 1px solid #ccc; width: auto; height: 250px;">
-            <img src="images/Alaska 49.jpg" alt="Alaska Airlines donation." style="border: 1px solid #ccc; width: auto; height: 250px;">
-
+            <img src="images/alaska 2.jpg" alt="Alaska blood center." style="border: 1px solid #ccc; max-width: 100%; height: 250px;">
+            <img src="images/alaska.jpg" alt="After my donation." style="border: 1px solid #ccc; max-width: 100%; height: 250px;">
+            <img src="images/Alaska 49.jpg" alt="Alaska Airlines donation." style="border: 1px solid #ccc; max-width: 100%; height: 250px;">
         </div>
+        
         <p style="text-align: center; font-size: 1.2em; margin-bottom: 80px; margin-top: 40px;">
             <strong>Hawaii:</strong> The grand finale of my mission is set to take place in Hawaii. I’m excited to share my upcoming plans for this final step, where I will complete my journey and celebrate this life-saving adventure with friends, family, and supporters.
         </p>
@@ -261,8 +298,8 @@
 
     <section id="about" style="padding: 20px; margin: 0 auto; max-width: 1000px;">
         <h2 style="text-align: center;">About</h2>
-        <div style="display: flex; align-items: center;">
-            <div style="text-align: left; max-width: 60%; border: 5px solid black; background-color: #F29CA2; border-radius: 30px; padding: 20px; color: black;">
+        <div class="content-container">
+            <div class="text-box">
                 <p><strong>
                     Hello! I’m Vinton Smith, a sales representative for Elanco Animal Health. Over the years, I’ve donated blood in 49 of the 50 states, with Hawaii being the final state on my list. Before I make my final donation in Hawaii, my mission is to encourage Elanco employees to donate blood in all 50 states. 
                 </strong>
@@ -276,27 +313,87 @@
                 </strong>
                 </p>
             </div>            
-            <img src="images/VintonSmithPicture.jpeg" width="300" alt="Picture of Vinton Smith" style="margin-left: 20px;">
-        </div>
+            <img src="images/VintonSmithPicture.jpeg" class="profile-image" alt="Picture of Vinton Smith">
+        </div>        
 
-        <h3 style="margin-top: 60px;margin-bottom: 20px; text-align: center;">Our path to donations in all 50 states!</h3>
+        <h3 style="margin-top: 60px; margin-bottom: 20px; text-align: center;">Our path to donations in all 50 states!</h3>
         <p style="text-align: center;">Click the map to go to the State Map tab!</p>
-            <div class="mini-svg-map" style="width: 100%; max-width: 600px; position: relative; left: -90px;">
-            </div>    
-        <h3 style="text-align: center;">My Donation Images</h3>
-        <div style="display: flex; justify-content: center; gap: 10px;">
-            <img src="images/Wilkes barre.jpg" alt="Wilkes Barre Donation" style="border: 1px solid #ccc; width: auto; height: 250px;">
-            <img src="images/Vitalant.jpg" alt="Vitalant" style="border: 1px solid #ccc; width: auto; height: 250px;">
-            <img src="images/Platelets.jpg" alt="Donated Platelets" style="border: 1px solid #ccc; width: auto; height: 250px;">
+        <div class="mini-svg-map" style="width: 100%; max-width: 600px; margin: 0 auto;">
         </div>
-        <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-            <img src="images/Penn State Hersey.jpg" alt="Penn State Hershey" style="border: 1px solid #ccc; width: auto; height: 300px;">
-            <img src="images/26 - 2023-07-07 - Frederick, MD (1)_1.jpg" alt="Frederick" style="border: 1px solid #ccc; width: auto; height: 300px;">
+        <h3 style="text-align: center;">My Donation Images</h3>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+            <img src="images/Wilkes barre.jpg" alt="Wilkes Barre Donation" style="border: 1px solid #ccc; max-width: 100%; height: 250px;">
+            <img src="images/Vitalant.jpg" alt="Vitalant" style="border: 1px solid #ccc; max-width: 100%; height: 250px;">
+            <img src="images/Platelets.jpg" alt="Donated Platelets" style="border: 1px solid #ccc; max-width: 100%; height: 250px;">
+        </div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px;">
+            <img src="images/Penn State Hersey.jpg" alt="Penn State Hershey" style="border: 1px solid #ccc; max-width: 100%; height: 300px;">
+            <img src="images/26 - 2023-07-07 - Frederick, MD (1)_1.jpg" alt="Frederick" style="border: 1px solid #ccc; max-width: 100%; height: 300px;">
         </div>
         <h3 style="text-align: center; margin-top: 100px;">I am also now working towards a new goal of donating platelets in all 50 states. Here is my progress:</h3>
-        <img src="images/Map - Platelets.jpg" style="max-width: 1000px;">
-    </section>
+        <img src="images/Map - Platelets.jpg" style="width: 100%; max-width: 1000px; margin: 0 auto; display: block;">
+        </section>
     
+    <section id="media" style="padding: 20px; margin: 0 auto; max-width: 1000px;">
+        <h2>Pennsylvania:</h2>
+        <ul>
+            <li>
+                <a href="https://www.abc27.com/community/gettysburg-man-pledges-to-donate-blood-in-all-50-states/" target="_blank">Harrisburg, PA - Gettysburg man pledges to donate blood in all 50 states</a>
+                - 
+                <a href="https://youtu.be/jW4mqD1O3m0?si=YsAV9YGMkoMsPuN8" target="_blank">Video</a>
+            </li>
+            <li>
+                <a href="https://www.gettysburgtimes.com/news/local/article_82a7ca10-45ce-11ef-9d27-affe8f64b941.html" target="_blank">Gettysburg Times, Gettysburg, PA: Local blood donor close to finishing 50-state goal | Local News</a>
+            </li>
+        </ul>
+    
+        <h2>Wisconsin:</h2>
+        <ul>
+            <li>
+                <a href="https://www.cbs58.com/news/it-does-make-a-significant-impact-man-visits-wisconsin-on-quest-to-donate-blood-in-all-50-states" target="_blank">Pewaukee, WI - 'It does make a significant impact': Man visits Wisconsin on quest to donate blood in all 50 states</a>
+                -
+                <a href="https://youtu.be/UHkz7PG_mWM?si=XIhKpwOPjmQINLYq" target="_blank">Video</a>
+            </li>
+        </ul>
+    
+        <h2>Alaska:</h2>
+        <ul>
+            <li>
+                <a href="https://www.youralaskalink.com/health/meet-vinton-smith-a-man-on-mission-to-donate-blood-in-all-50-states/article_33a5d4e6-3afe-11ef-b721-affe683c81a8.html" target="_blank">Anchorage, Alaska - Meet Vinton Smith, a man on mission to donate blood in all 50 states</a>
+                -
+                <a href="https://youtu.be/LaUzsG0CEMY?si=CD7mvFMBvpK41FlF" target="_blank">Video</a>
+            </li>
+            <li><a href="https://news.alaskaair.com/community/guest-on-mission-donate-blood-all-50-states-alaska-airlines/" target="_blank">Alaska Airlines: Man on a mission: Alaska Airlines flies Vinton Smith to 49th state for blood donation - Alaska Airlines News</a></li>
+        </ul>
+    
+        <h2>Idaho:</h2>
+        <ul>
+            <li><a href="https://www.postregister.com/news/local/man-donating-blood-in-50-states-to-raise-awareness-for-national-blood-shortage/article_48c73032-66f0-11ee-b4df-df742161b581.html" target="_blank">Idaho Falls, Idaho - Man donating blood in 50 states to raise awareness for national blood shortage</a></li>
+            <li><a href="https://www.kivitv.com/news/man-on-a-mission-to-donate-blood-in-all-50-states" target="_blank">Boise, Idaho - Man on a mission to donate blood in all 50 States</a></li>
+            <li><a href="https://localnews8.com/news/idaho-falls/2023/10/09/pennsylvania-man-on-a-mission-to-donate-blood-in-all-50-states/" target="_blank">Boise, Idaho - Pennsylvania man on a mission to donate blood in all 50 states</a></li>
+        </ul>
+    
+        <h2>Nevada:</h2>
+        <ul>
+            <li>
+                <a href="https://news3lv.com/news/local/man-on-a-mission-stops-in-las-vegas-to-donate-blood-in-all-50-states-vitalant-donor-center-vinton-smith-nevada" target="_blank">Las Vegas, NV - Man on a mission stops in Las Vegas to donate blood in all 50 states</a>
+                -
+                <a href="https://www.facebook.com/watch/?v=1797237104023364" target="_blank">Facebook Video</a>
+            </li>
+        </ul>
+    
+        <h2>Ohio:</h2>
+        <ul>
+            <li><a href="https://nohredcross.org/tag/vinton-smith/" target="_blank">Cleveland, OH - Vinton Smith | NOHredcross</a></li>
+        </ul>
+    
+        <h2>Kentucky:</h2>
+        <ul>
+            <li><a href="https://www.wvlt.tv/video/2024/01/04/man-mission-donate-all-50-states-during-national-blood-donor-month/" target="_blank">Lexington, KY - Man on a mission to donate in all 50 states during National Blood Donor Month</a></li>
+            <li><a href="https://www.kybloodcenter.org/donor-stories/vinton-smith" target="_blank">Lexington, KY - Vinton Smith | Kentucky Blood Center</a></li>
+        </ul>
+    </section>    
+
     <section id="donation-info" style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
         <h2 style="text-align: center; color: #333;">How and Where to Donate Blood Today!</h2>
         <ul style="list-style-type: none; padding: 0;">
