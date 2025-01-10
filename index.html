@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blood Across America</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <!-- Favicon in ICO format -->
+    <!-- Blood Drops -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-
-    <!-- Favicon in PNG format (32x32) -->
     <link rel="icon" sizes="32x32" href="images/favicon-32x32.png" type="image/png">
-
-    <!-- Favicon in PNG format (16x16) -->
     <link rel="icon" sizes="16x16" href="images/favicon-16x16.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -318,7 +316,7 @@
 
         <h3 style="margin-top: 60px; margin-bottom: 20px; text-align: center;">Our path to donations in all 50 states!</h3>
         <p style="text-align: center;">Click the map to go to the State Map tab!</p>
-        <div class="mini-svg-map" style="width: 100%; max-width: 600px; margin: 0 auto;">
+        <div class="mini-svg-map" style="width: 100%; max-width: 600px; margin: 0;">
         </div>
         <h3 style="text-align: center;">My Donation Images</h3>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
@@ -828,7 +826,7 @@
                         acc[donation.state.trim()] = (acc[donation.state.trim()] || 0) + 1;
                         return acc;
                     }, {});
-
+                        
                     // Function to load and render an SVG map
                     function loadSvgMap(containerSelector, svgFile, scale = 1, enableClick = true) {
                         fetch(svgFile)
@@ -951,11 +949,18 @@
                             .catch(error => console.error(`Error loading SVG for ${containerSelector}:`, error));
                     }
 
+                    // Detect mobile devices and adjust scale dynamically
+                    const isMobile = window.innerWidth <= 768; // Mobile width threshold
+                    const scale = isMobile ? 0.3 : .92; // Smaller scale for mobile
+
+                    // Load the map with the appropriate scale
+                    loadSvgMap('.svg-map', 'us.svg', scale);
+
                     // Load the main map
                     loadSvgMap('.svg-map', 'us.svg');
 
                     // Load the mini map
-                    loadSvgMap('.mini-svg-map', 'us.svg', 0.7, false);
+                    loadSvgMap('.mini-svg-map', 'us.svg', scale, false);
 
                     function darkenColor(hex, percent) {
                         const num = parseInt(hex.slice(1), 16);
